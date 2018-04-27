@@ -32,7 +32,7 @@ public class FitDuelApplication {
 	}
 
 
-	/*@RequestMapping(method = RequestMethod.POST, value = "/charge")
+	@RequestMapping(method = RequestMethod.POST, value = "/charge")
 	@ResponseBody
 	public String createQueryCharge(@RequestBody Map<String, Object> params) {
 
@@ -50,9 +50,8 @@ public class FitDuelApplication {
 		} catch (APIException e) {
 			e.printStackTrace();
 		}
-
-
-    }*/
+		return new Gson().toJson(charge);
+    }
 
 
 	public static void main(String[] args) {
