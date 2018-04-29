@@ -24,11 +24,6 @@ public class ChargeController {
         return new Gson().toJson(charge);
     }
 
-    @RequestMapping("/hello")
-    @ResponseBody
-    String hello() {
-        return "Hello from Heroku!!!!!!";
-    }
 
     @ExceptionHandler(StripeException.class)
     public String handleError(Model model, StripeException ex) {
