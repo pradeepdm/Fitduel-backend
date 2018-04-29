@@ -3,6 +3,8 @@ package com.fitness.fitduel.demo.controller;
 import com.google.gson.Gson;
 import com.stripe.exception.StripeException;
 import com.stripe.model.Charge;
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -17,17 +19,24 @@ public class ChargeController {
     private StripeService paymentsService;
 
     @PostMapping("/charge")
-    public String charge(Map<String, Object> chargeParams)
+    public JSONObject charge(Map<String, Object> chargeParams)
             throws StripeException {
 
+        JSONObject result = null;
         Charge charge = paymentsService.charge(chargeParams);
-        return new Gson().toJson(charge);
+        String jsonRes = new Gson().toJson(charge);
+        try {
+            result = new JSONObject(jsonRes);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        };
+        return  result;
     }
 
 
     @ExceptionHandler(StripeException.class)
     public String handleError(Model model, StripeException ex) {
         model.addAttribute("error", ex.getMessage());
-        return "result";
+        return "error";
     }
 }
