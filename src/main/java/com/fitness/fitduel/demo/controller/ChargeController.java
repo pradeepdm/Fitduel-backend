@@ -18,19 +18,20 @@ public class ChargeController {
     @Autowired
     private StripeService paymentsService;
 
-    @PostMapping("/charge")
-    public JSONObject charge(Map<String, Object> chargeParams)
-            throws StripeException {
+    @RequestMapping(method = RequestMethod.POST, value = "/charge")
+    @ResponseBody
+    public String createQueryCharge(@RequestBody Map<String, Object> params) throws StripeException {
 
         JSONObject result = null;
-        Charge charge = paymentsService.charge(chargeParams);
+        Charge charge = paymentsService.charge(params);
         String jsonRes = new Gson().toJson(charge);
         try {
             result = new JSONObject(jsonRes);
         } catch (JSONException e) {
             e.printStackTrace();
-        };
-        return  result;
+        }
+
+        return jsonRes;
     }
 
 
