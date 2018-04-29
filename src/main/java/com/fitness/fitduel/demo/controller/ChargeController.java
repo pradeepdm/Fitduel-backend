@@ -1,4 +1,4 @@
-package controller;
+package com.fitness.fitduel.demo.controller;
 
 import com.google.gson.Gson;
 import com.stripe.exception.StripeException;
@@ -7,12 +7,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import service.StripeService;
+import com.fitness.fitduel.demo.service.StripeService;
 
 import java.util.Map;
 
 @RestController
+@RequestMapping("/")
 public class ChargeController {
 
     @Autowired

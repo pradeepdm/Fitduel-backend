@@ -1,4 +1,4 @@
-package service;
+package com.fitness.fitduel.demo.service;
 
 import com.stripe.Stripe;
 import com.stripe.exception.*;
@@ -7,19 +7,18 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
-import java.util.HashMap;
 import java.util.Map;
 
 @Service
 public class StripeService {
 
-    @Value("${STRIPE_SECRET_KEY}")
-    private String secretKey;
+    private final String STRIPE_SECRET_KEY = "sk_test_x69URH6QZbttIzSqmVeqowC5";
 
     @PostConstruct
     public void init() {
-        Stripe.apiKey = "sk_test_x69URH6QZbttIzSqmVeqowC5";
+        Stripe.apiKey = STRIPE_SECRET_KEY;
     }
+
     public Charge charge(Map<String, Object>  chargeParams)
             throws AuthenticationException, InvalidRequestException,
             APIConnectionException, CardException, APIException {
