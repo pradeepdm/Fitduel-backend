@@ -20,14 +20,15 @@ public class ChargeController {
 
     @RequestMapping(method = RequestMethod.POST, value = "/charge")
     @ResponseBody
-    public Charge createQueryCharge(@RequestBody Map<String, Object> params) throws StripeException {
+    public String createQueryCharge(@RequestBody Map<String, Object> params) throws StripeException {
 
         Charge charge = paymentsService.charge(params);
-        return charge;
+        return charge.toJson();
     }
 
 
     @RequestMapping(method = RequestMethod.POST, value = "/refund")
+    @ResponseBody
     public Refund createRefundRequest(@RequestBody Map<String, Object> params) {
 
         Refund refund = null;
