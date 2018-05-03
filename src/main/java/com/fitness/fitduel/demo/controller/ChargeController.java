@@ -30,7 +30,6 @@ public class ChargeController {
     @RequestMapping(method = RequestMethod.POST, value = "/refund")
     @ResponseBody
     public Refund createRefundRequest(@RequestBody Map<String, Object> params) {
-
         Refund refund = null;
         try {
             refund = paymentsService.refund(params);
