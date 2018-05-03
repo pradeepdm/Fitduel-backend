@@ -3,6 +3,8 @@ package com.fitness.fitduel.demo.service;
 import com.stripe.Stripe;
 import com.stripe.exception.*;
 import com.stripe.model.Charge;
+import com.stripe.model.Payout;
+import com.stripe.model.Refund;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
@@ -23,5 +25,11 @@ public class StripeService {
             throws AuthenticationException, InvalidRequestException,
             APIConnectionException, CardException, APIException {
         return Charge.create(chargeParams);
+    }
+
+    public Refund refund(Map<String, Object> params)
+            throws CardException, APIException, AuthenticationException,
+            InvalidRequestException, APIConnectionException {
+        return Refund.create(params);
     }
 }

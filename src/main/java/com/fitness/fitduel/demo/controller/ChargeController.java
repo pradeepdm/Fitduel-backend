@@ -1,9 +1,9 @@
 package com.fitness.fitduel.demo.controller;
 
-import com.google.gson.Gson;
-import com.stripe.exception.StripeException;
+import com.stripe.exception.*;
 import com.stripe.model.Charge;
-import org.json.JSONException;
+import com.stripe.model.Payout;
+import com.stripe.model.Refund;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
@@ -22,18 +22,26 @@ public class ChargeController {
     @ResponseBody
     public Charge createQueryCharge(@RequestBody Map<String, Object> params) throws StripeException {
 
-        JSONObject result = null;
         Charge charge = paymentsService.charge(params);
-       /* String jsonRes = new Gson().toJson(charge);
-        try {
-            result = new JSONObject(jsonRes);
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }*/
-
         return charge;
     }
 
+
+    @RequestMapping(method = RequestMethod.POST, value = "/refund")
+    public Refund createRefundRequest(@RequestBody Map<String, Object> params) {
+
+        Refund refund = null;
+        try {
+            refund = paymentsService.refund(params);
+        } catch (CardException |
+                APIException |
+                AuthenticationException |
+                InvalidRequestException |
+                APIConnectionException e) {
+            e.printStackTrace();
+        }
+        return refund;
+    }
 
     @ExceptionHandler(StripeException.class)
     public String handleError(Model model, StripeException ex) {
