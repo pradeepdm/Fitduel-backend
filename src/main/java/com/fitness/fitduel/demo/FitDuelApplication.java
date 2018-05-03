@@ -13,7 +13,7 @@ public class FitDuelApplication {
     @RequestMapping("/hello")
     @ResponseBody
     String hello() {
-        return "Hello from Heroku!!!!!!";
+        return "Hello from Heroku Test!!!!!!";
     }
 
     public static void main(String[] args) {
