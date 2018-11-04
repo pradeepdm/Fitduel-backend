@@ -14,7 +14,7 @@ import java.util.Map;
 @Service
 public class StripeService {
 
-    private final String STRIPE_SECRET_KEY = "sk_test_x69URH6QZbttIzSqmVeqowC5";
+    private final String STRIPE_SECRET_KEY = "enter secret key here";
 
     @PostConstruct
     public void init() {
